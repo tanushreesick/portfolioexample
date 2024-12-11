@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Sketches</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Caveat', cursive;
+            background-color: #fdf6e7;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section-title {
+            text-align: right;
+            font-size: 2em;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .sketches-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 0 auto;
+            max-width: 1000px;
+        }
+
+        .sketch-item {
+            position: relative;
+            transition: transform 0.3s ease;
+            perspective: 1000px;
+        }
+
+        .sketch-item:hover {
+            transform: scale(1.02);
+        }
+
+        .sketch-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #fff;
+            padding: 10px;
+        }
+
+        .sketch-card {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .sketch-card.flipped {
+            transform: rotateY(180deg) scale(1.1);
+        }
+
+        .sketch-front,
+        .sketch-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            background-color: #fff;
+            padding: 10px;
+        }
+
+        .sketch-back {
+            transform: rotateY(180deg);
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        .sketch-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Specific positioning for different sketches */
+        .sketch-item:nth-child(1) {
+            grid-column: 1 / 2;
+            grid-row: 1 / 2;
+        }
+
+        .sketch-item:nth-child(2) {
+            grid-column: 1 / 2;
+            grid-row: 2 / 3;
+        }
+
+        .sketch-item:nth-child(3) {
+            grid-column: 2 / 3;
+            grid-row: 1 / 2;
+        }
+
+        .sketch-item:nth-child(4) {
+            grid-column: 2 / 3;
+            grid-row: 2 / 3;
+        }
+
+        @media (max-width: 768px) {
+            .sketches-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .sketch-item {
+                grid-column: 1 !important;
+                grid-row: auto !important;
+            }
+
+            .section-title {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+
+            .sketch-item img {
+                padding: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="section-title">Sketches</h2>
+        
+        <div class="sketches-grid">
+            <div class="sketch-item">
+                <div class="sketch-card">
+                    <div class="sketch-front">
+                        <img src="/placeholder.svg?height=400&width=400" alt="Nike cabinet sketch" loading="lazy">
+                    </div>
+                    <div class="sketch-back">
+                        <p>Nike Cabinet Sketch<br>Created with graphite pencils<br>2023</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sketch-item">
+                <div class="sketch-card">
+                    <div class="sketch-front">
+                        <img src="/placeholder.svg?height=400&width=400" alt="Portrait sketch" loading="lazy">
+                    </div>
+                    <div class="sketch-back">
+                        <p>Portrait Sketch<br>Created with graphite pencils<br>2023</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sketch-item">
+                <div class="sketch-card">
+                    <div class="sketch-front">
+                        <img src="/placeholder.svg?height=400&width=400" alt="Fish studies sketch" loading="lazy">
+                    </div>
+                    <div class="sketch-back">
+                        <p>Fish Studies Sketch<br>Created with graphite pencils<br>2023</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sketch-item">
+                <div class="sketch-card">
+                    <div class="sketch-front">
+                        <img src="/placeholder.svg?height=400&width=400" alt="Watercolor tree" loading="lazy">
+                    </div>
+                    <div class="sketch-back">
+                        <p>Watercolor Tree<br>Created with watercolor<br>2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.sketch-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('flipped');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.sketch-card')) {
+                document.querySelectorAll('.sketch-card.flipped').forEach(card => {
+                    card.classList.remove('flipped');
+                });
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.sketch-card.flipped').forEach(card => {
+                    card.classList.remove('flipped');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
